@@ -4,13 +4,20 @@ import { useState } from 'react';
 import PrimerFormulario from './Componentes/PrimerFormulario';
 
 function App() {
-  const[personaNombre, setPersona] = useState("Nombre:")
+  const[personaNombre] = useState("Nombre:")
   return (
     <div className="App">
       <header className="App-header">
         <img src={spiderman} className="App-logo" alt="logo" />
-        <PrimerFormulario personaNombre={personaNombre}/>
       </header>
+      <body>
+        <div className='Form'>
+        <fieldset>
+          <label>Registro de Usuario</label>
+        </fieldset>
+          <PrimerFormulario personaNombre={personaNombre}/>
+        </div>
+      </body>
     </div>
   );
 }
