@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import spiderman from './spiderman-homecoming.svg';
 import './App.css';
-import PrimerFormulario from './PrimerFormulario';
+import { useState } from 'react';
+import PrimerFormulario from './Componentes/PrimerFormulario';
 
 function App() {
-  const[personaNombre, setPersona] = useState("Nombre");
+  const[personaNombre, setPersona] = useState("Nombre:")
   return (
     <div className="App">
       <header className="App-header">
