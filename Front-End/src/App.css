@@ -2,13 +2,13 @@
   text-align: center;
 }
 .Form{
-    width: 500px;
-    margin: 20px auto;
-    border: 1px solid rgb(165, 56, 56);;
-    background-color: rgb(165, 56, 56);;
+  width: 60vw;
+  max-width: 500px;
+  min-width: 300px;
+  margin: 0 auto;
 }
 .App-logo {
-  height: 4vmin;
+  height: 10vmin;
   pointer-events: none;
 }
 
@@ -19,8 +19,8 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 5vh;
+  background-color: #1b1b32;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;

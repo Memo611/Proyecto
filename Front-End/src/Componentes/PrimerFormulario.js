@@ -22,29 +22,29 @@ function PrimerFormulario(){
     return (
         <form onSubmit={enviarFormulario}>
             <fieldset>
-            <label>
+            <label for="name">
                 Nombre:
-                <input type="text" name="nombre" value={datosFormulario.nombre} onChange={manejarCambio} />
+                <input  id="name"type="text" name="nombre" value={datosFormulario.nombre} onChange={manejarCambio} />
             </label>
-            <label>
+            <label for="primerApellido">
                 Primer Apellido:
-                <input type="text" name="primerApellido" value={datosFormulario.primerApellido} onChange={manejarCambio} />
+                <input id="primerApellido" type="text" name="primerApellido" value={datosFormulario.primerApellido} onChange={manejarCambio} />
             </label>
-            <label>
+            <label for="segundoApellido">
                 Segundo Apellido:
-                <input type="text" name="segundoApellido" value={datosFormulario.segundoApellido} onChange={manejarCambio} />
+                <input id="segundoApellido" type="text" name="segundoApellido" value={datosFormulario.segundoApellido} onChange={manejarCambio} />
             </label>
-            <label>
+            <label for="nombreUsuario">
                 Nombre de Usuario:
-                <input type="text" name="nombreUsuario" value={datosFormulario.nombreUsuario} onChange={manejarCambio} />
+                <input id="nombreUsuario" type="text" name="nombreUsuario" value={datosFormulario.nombreUsuario} onChange={manejarCambio} />
             </label>
-            <label>
+            <label for="contraseña">
                 Contraseña:
-                <input type="password" name="contraseña" value={datosFormulario.contraseña} onChange={manejarCambio} />
+                <input id="contraseña" type="password" name="contraseña" value={datosFormulario.contraseña} onChange={manejarCambio} />
             </label>
-            <label>
+            <label for="confirmarContraseña">
                 Confirmar Contraseña:
-                <input type="password" name="confirmarContraseña" value={datosFormulario.confirmarContraseña} onChange={manejarCambio} />
+                <input id="confirmarContraseña" type="password" name="confirmarContraseña" value={datosFormulario.confirmarContraseña} onChange={manejarCambio} />
             </label>
         </fieldset>
         <fieldset>
