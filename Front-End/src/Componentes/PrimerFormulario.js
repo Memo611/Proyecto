@@ -1,56 +1,78 @@
-import React, { useState } from 'react';
-import "./PrimerFormulario.css"
-function PrimerFormulario(){
-    const [datosFormulario, setDatosFormulario] = useState({
-        nombre: '',
-        primerApellido: '',
-        segundoApellido: '',
-        nombreUsuario: '',
-        contraseña: '',
-        confirmarContraseña: '',
-    });
-    const manejarCambio = (evento) => {
-        setDatosFormulario({ ...datosFormulario, [evento.target.name]: evento.target.value });
-    };
-    
-    const enviarFormulario = (evento) => {
-        evento.preventDefault();
-        // Envía los datos del formulario aquí
-        console.log(datosFormulario);
-    };
-    
+import {Col, Button, Row, Form, Card, CardHeader, CardBody, CardFooter} from 'react-bootstrap'
+import './PrimerFormulario.css'
+function PrimerFormulario (personaNombre){
+    function Click(){
+        console.log (personaNombre);
+    }
     return (
-        <form onSubmit={enviarFormulario}>
-            <fieldset>
-            <label for="name">
-                Nombre:
-                <input  id="name"type="text" name="nombre" value={datosFormulario.nombre} onChange={manejarCambio} />
-            </label>
-            <label for="primerApellido">
-                Primer Apellido:
-                <input id="primerApellido" type="text" name="primerApellido" value={datosFormulario.primerApellido} onChange={manejarCambio} />
-            </label>
-            <label for="segundoApellido">
-                Segundo Apellido:
-                <input id="segundoApellido" type="text" name="segundoApellido" value={datosFormulario.segundoApellido} onChange={manejarCambio} />
-            </label>
-            <label for="nombreUsuario">
-                Nombre de Usuario:
-                <input id="nombreUsuario" type="text" name="nombreUsuario" value={datosFormulario.nombreUsuario} onChange={manejarCambio} />
-            </label>
-            <label for="contraseña">
-                Contraseña:
-                <input id="contraseña" type="password" name="contraseña" value={datosFormulario.contraseña} onChange={manejarCambio} />
-            </label>
-            <label for="confirmarContraseña">
-                Confirmar Contraseña:
-                <input id="confirmarContraseña" type="password" name="confirmarContraseña" value={datosFormulario.confirmarContraseña} onChange={manejarCambio} />
-            </label>
-        </fieldset>
-        <fieldset>
-            <button type="submit">Guardar</button>
-        </fieldset>
-        </form>
+        <Row sm={7}>
+        <Card>
+            <CardHeader> Resgistro de Usuario </CardHeader>
+
+            <CardBody>
+            <Row>
+            <Col>
+            <Form.Label htmlFor='nombre'>Nombre : </Form.Label>
+            </Col>
+            <Col>
+                <input className='form-control'/>
+            </Col>
+            </Row>
+
+            <Row>
+            <Col>
+            <Form.Label htmlFor='Primer Apellido'>Primer Apellido : </Form.Label>
+            </Col>
+            <Col>
+                <input className='form-control'/> 
+            </Col>
+            </Row>
+
+            <Row>
+            <Col>
+            <Form.Label htmlFor='Segundo Apellido'>Segundo Apellido : </Form.Label>
+            </Col>
+            <Col>
+                <input className='form-control'/>
+            </Col>
+            </Row>
+
+            <Row>
+            <Col>
+            <Form.Label htmlFor='Nombre de usuario'>Nombre de usuario : </Form.Label>
+            </Col>
+            <Col>
+                <input className='form-control'/> 
+            </Col>
+            </Row>
+
+            <Row>
+            <Col>
+            <Form.Label htmlFor='Contraseña'>Contraseña : </Form.Label>
+            </Col>
+            <Col>
+                <input className='form-control'/>
+            </Col>
+            </Row>
+
+            <Row>
+            <Col>
+            <Form.Label htmlFor='Confirmar Contraseña'>Confirmar Contraseña : </Form.Label>
+            </Col>
+            <Col>
+                <input className='form-control'/> 
+            </Col>
+            </Row>
+
+            </CardBody>
+
+            <CardFooter>
+                <Col>
+                <Button onClick = {Click()}> Guardar</Button> 
+            </Col></CardFooter>
+        </Card>
+        </Row>
     );
 }
+
 export default PrimerFormulario;

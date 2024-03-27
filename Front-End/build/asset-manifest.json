@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.dbbfc40d.css",
+    "main.js": "/static/js/main.eefbeacc.js",
+    "static/js/453.4645cbc1.chunk.js": "/static/js/453.4645cbc1.chunk.js",
+    "static/media/spiderman-homecoming.svg": "/static/media/spiderman-homecoming.b19c63703a6d7e2f8d5de8697fd061b5.svg",
+    "index.html": "/index.html",
+    "main.dbbfc40d.css.map": "/static/css/main.dbbfc40d.css.map",
+    "main.eefbeacc.js.map": "/static/js/main.eefbeacc.js.map",
+    "453.4645cbc1.chunk.js.map": "/static/js/453.4645cbc1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dbbfc40d.css",
+    "static/js/main.eefbeacc.js"
+  ]
+}
