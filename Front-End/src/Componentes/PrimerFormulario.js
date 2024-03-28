@@ -6,43 +6,43 @@ function PrimerFormulario (personaNombre){
     }
     return (
         <Row sm={7}>
-        <Card>
-            <CardHeader> Resgistro de Usuario </CardHeader>
+        <Card className='estilo'>
+            <CardHeader className='Titulo'> Resgistro de Usuario </CardHeader>
 
-            <CardBody>
+            <CardBody className='cuerpo'>
             <Row>
             <Col>
             <Form.Label htmlFor='nombre'>Nombre : </Form.Label>
             </Col>
             <Col>
-                <input className='form-control'/>
+                <input id="nombre" className='form-control'/>
             </Col>
             </Row>
 
             <Row>
             <Col>
-            <Form.Label htmlFor='Primer Apellido'>Primer Apellido : </Form.Label>
+            <Form.Label htmlFor='PrimerApellido'>Primer Apellido : </Form.Label>
             </Col>
             <Col>
-                <input className='form-control'/> 
-            </Col>
-            </Row>
-
-            <Row>
-            <Col>
-            <Form.Label htmlFor='Segundo Apellido'>Segundo Apellido : </Form.Label>
-            </Col>
-            <Col>
-                <input className='form-control'/>
+                <input id="PrimerApellido" className='form-control'/> 
             </Col>
             </Row>
 
             <Row>
             <Col>
-            <Form.Label htmlFor='Nombre de usuario'>Nombre de usuario : </Form.Label>
+            <Form.Label htmlFor='SegundoApellido'>Segundo Apellido : </Form.Label>
             </Col>
             <Col>
-                <input className='form-control'/> 
+                <input id="SegundoApellido" className='form-control'/>
+            </Col>
+            </Row>
+
+            <Row>
+            <Col>
+            <Form.Label htmlFor='NombreUsuario'>Nombre de usuario : </Form.Label>
+            </Col>
+            <Col>
+                <input id="NombreUsuario" className='form-control'/> 
             </Col>
             </Row>
 
@@ -51,16 +51,16 @@ function PrimerFormulario (personaNombre){
             <Form.Label htmlFor='Contraseña'>Contraseña : </Form.Label>
             </Col>
             <Col>
-                <input className='form-control'/>
+                <input id="Contraseña" className='form-control'/>
             </Col>
             </Row>
 
             <Row>
             <Col>
-            <Form.Label htmlFor='Confirmar Contraseña'>Confirmar Contraseña : </Form.Label>
+            <Form.Label htmlFor='ConfirmarContraseña'>Confirmar Contraseña : </Form.Label>
             </Col>
             <Col>
-                <input className='form-control'/> 
+                <input id="ConfirmarContraseña" className='form-control'/> 
             </Col>
             </Row>
 
