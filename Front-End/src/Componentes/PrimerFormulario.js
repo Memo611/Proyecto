@@ -15,7 +15,7 @@ function PrimerFormulario (personaNombre){
             <Form.Label htmlFor='nombre'>Nombre : </Form.Label>
             </Col>
             <Col>
-                <input id="nombre" className='form-control'/>
+                <input type="text" id="nombre" className='form-control' required/>
             </Col>
             </Row>
 
@@ -24,7 +24,7 @@ function PrimerFormulario (personaNombre){
             <Form.Label htmlFor='PrimerApellido'>Primer Apellido : </Form.Label>
             </Col>
             <Col>
-                <input id="PrimerApellido" className='form-control'/> 
+                <input type="text" id="PrimerApellido" className='form-control' required/> 
             </Col>
             </Row>
 
@@ -33,7 +33,25 @@ function PrimerFormulario (personaNombre){
             <Form.Label htmlFor='SegundoApellido'>Segundo Apellido : </Form.Label>
             </Col>
             <Col>
-                <input id="SegundoApellido" className='form-control'/>
+                <input type="text" id="SegundoApellido" className='form-control'required />
+            </Col>
+            </Row>
+
+            <Row>
+            <Col>
+            <Form.Label htmlFor='Telefono'>Telefono : </Form.Label>
+            </Col>
+            <Col>
+                <input type="number" id="Telefono" className='form-control' required/> 
+            </Col>
+            </Row>
+
+            <Row>
+            <Col>
+            <Form.Label htmlFor='Correo'> Correo : </Form.Label>
+            </Col>
+            <Col>
+                <input type="email" id="Correo" className='form-control' required/> 
             </Col>
             </Row>
 
@@ -42,7 +60,7 @@ function PrimerFormulario (personaNombre){
             <Form.Label htmlFor='NombreUsuario'>Nombre de usuario : </Form.Label>
             </Col>
             <Col>
-                <input id="NombreUsuario" className='form-control'/> 
+                <input type="text" id="NombreUsuario" className='form-control' required/> 
             </Col>
             </Row>
 
@@ -51,7 +69,7 @@ function PrimerFormulario (personaNombre){
             <Form.Label htmlFor='Contraseña'>Contraseña : </Form.Label>
             </Col>
             <Col>
-                <input id="Contraseña" className='form-control'/>
+                <input type="password" id="Contraseña" className='form-control' required/>
             </Col>
             </Row>
 
@@ -60,7 +78,7 @@ function PrimerFormulario (personaNombre){
             <Form.Label htmlFor='ConfirmarContraseña'>Confirmar Contraseña : </Form.Label>
             </Col>
             <Col>
-                <input id="ConfirmarContraseña" className='form-control'/> 
+                <input  type="password" id="ConfirmarContraseña" className='form-control' required/> 
             </Col>
             </Row>
 

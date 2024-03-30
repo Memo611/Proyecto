@@ -12,7 +12,7 @@ body{
 }
 
 .estilo.card{
-    width: 800px;
+    width: 50em;
     min-height: 2em;
     margin-top: 10px;
     border: none;
@@ -23,8 +23,8 @@ body{
 
 .cuerpo.card-body{
     border: none;
-    border-top: 5px solid #ffffff;
-    border-bottom: 5px solid #ffffff;
+    border-top: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
     padding: 5px;
 }
 .card-footer{
@@ -34,7 +34,7 @@ body{
 
 .form-label{
     display: block;
-    margin: 10px auto;
+    margin: 20px auto;
 }
 
 .form-control{
@@ -43,6 +43,7 @@ body{
     min-height: 2em;
     background-color: #25255a;
     border: 1px solid #0a0a23;
+    color: #ffffff;
 }
 
 button{
