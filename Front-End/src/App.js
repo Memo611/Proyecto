@@ -2,9 +2,9 @@ import spiderman from './spiderman-homecoming.svg';
 import './App.css';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import PrimerFormulario from './Componentes/PrimerFormulario';
+import PrimerFormulario from './Componentes/PrimerFormulario.js';
 import { Col,Row } from 'react-bootstrap';
-import Grid from './Componentes/Grid';
+import Grid from './Componentes/Grid.js';
 
 function App() {
   const[personaNombre] = useState("Nombre:");
@@ -20,19 +20,16 @@ function App() {
       <body>
 
         <div className='Form'>
-        </div>
         <Row className='justify-content-center'>
           <Col sm={10}>
             <PrimerFormulario personaNombre={personaNombre}/>
           </Col>
         </Row>
-
-        <div className='Grid'>
-            <row>
-              <Grid></Grid>
-            </row>
         </div>
 
+        <div className='Grid'>
+              <Grid className='tabla'/>
+        </div>
       </body>
     </div>
   );

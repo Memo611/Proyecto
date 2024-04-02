@@ -1,11 +1,10 @@
 {
-  "name": "presentacion-web",
+  "name": "prueba",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.14",
-    "@syncfusion/ej2-react-grids": "^25.1.37",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -40,13 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

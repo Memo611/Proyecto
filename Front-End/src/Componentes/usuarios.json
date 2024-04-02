@@ -1,5 +1,4 @@
-{
-    "usuarios": [
+[
       {
         "id": 1,
         "Nombre": "Juan",
@@ -99,6 +98,5 @@
         "Telefono": "369147258",
         "NombredeUsuario": "danield"
       }
-    ]
-  }
+  ]
   
