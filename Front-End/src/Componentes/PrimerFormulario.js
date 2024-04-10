@@ -1,9 +1,19 @@
 import {Col, Button, Row, Form, Card, CardHeader, CardBody, CardFooter} from 'react-bootstrap'
 import './PrimerFormulario.css'
+import { useState } from 'react';
+import { setFormularioAbierto } from '../App.js'; // Importa setFormularioAbierto
+
 function PrimerFormulario (personaNombre){
     function Click(){
         console.log (personaNombre);
     }
+    const [mostrarFormulario, setMostrarFormulario] = useState(true);
+
+    const cancelar = () => {
+        setMostrarFormulario(false);
+        setFormularioAbierto(false);  // Cierra el formulario en App.js
+    };
+
     return (
         <Row sm={7}>
         <Card className='estilo'>
@@ -86,7 +96,8 @@ function PrimerFormulario (personaNombre){
 
             <CardFooter>
                 <Col>
-                <Button onClick = {Click()}> Guardar</Button> 
+                <Button onClick = {Click()}> Guardar</Button>
+                <Button variant="danger" onClick = {cancelar}> Cancelar</Button>                
             </Col></CardFooter>
         </Card>
         </Row>
