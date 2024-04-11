@@ -14,6 +14,10 @@ function App() {
     setFormularioAbierto(true);
   };
 
+  const handleCloseFormulario = () => {
+    setFormularioAbierto(false);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -28,7 +32,10 @@ function App() {
             <div className="Form">
               <Row className="justify-content-center">
                 <Col sm={10}>
-                  <PrimerFormulario personaNombre={personaNombre} />
+                  <PrimerFormulario 
+                    personaNombre={personaNombre} 
+                    onCloseFormulario={handleCloseFormulario} 
+                  />
                 </Col>
               </Row>
             </div>
@@ -40,4 +47,3 @@ function App() {
 }
 
 export default App;
-export { setFormularioAbierto }; // Exportar la función
