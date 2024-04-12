@@ -29,10 +29,11 @@ function App() {
       </header>
 
       <body>
-        <div className="Grid">
-        <Button className="NewUser" onClick={abrirFormulario}>Nuevo Usuario</Button> {/* Boton para abrir formulario */}
         {tablaabierta && (
-          <Grid className="tabla" /> /* Renderiza el componente Grid personalizado */
+          <div className="Grid">
+          <Button className="NewUser" onClick={abrirFormulario}>Nuevo Usuario</Button> 
+          <Grid className="tabla" /> 
+          </div>
         )}
           {formularioAbierto && (   /* Condicion para verificar el estado de formularioAbierto*/
             <div className="Form">
@@ -46,7 +47,6 @@ function App() {
               </Row>
             </div>
           )}
-        </div>
       </body>
     </div>
   );
