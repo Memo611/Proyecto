@@ -1,21 +1,25 @@
-import spiderman from './spiderman-homecoming.svg';
-import './App.css';
+import spiderman from './spiderman-homecoming.svg'; //Importacion de LOGO
+import './App.css';  //Importacion de Diseño CSS
 import { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import PrimerFormulario from './Componentes/PrimerFormulario.js';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import PrimerFormulario from './Componentes/PrimerFormulario.js'; //Importacion de Formulario
 import { Button, Col, Row } from 'react-bootstrap';
-import Grid from './Componentes/Grid.js';
+import Grid from './Componentes/Grid.js';  //Importacion de Tabla
 
 function App() {
-  const [personaNombre] = useState("Nombre:");
-  const [formularioAbierto, setFormularioAbierto] = useState(false);
 
+  const [personaNombre] = useState("Nombre:");
+  const [formularioAbierto, setFormularioAbierto] = useState(false);  //Variable constante para abrir y cerrar formulario con false/true
+  const [tablaabierta, setTablaAbierta] = useState(true);
+  
   const abrirFormulario = () => {
     setFormularioAbierto(true);
+    setTablaAbierta(false);
   };
 
   const handleCloseFormulario = () => {
     setFormularioAbierto(false);
+    setTablaAbierta(true)
   };
 
   return (
@@ -26,15 +30,17 @@ function App() {
 
       <body>
         <div className="Grid">
-          <Grid className="tabla" /> {/* Renderiza tu componente Grid personalizado */}
-          <Button className="NewUser" onClick={abrirFormulario}>Nuevo Usuario</Button>
-          {formularioAbierto && (
+        <Button className="NewUser" onClick={abrirFormulario}>Nuevo Usuario</Button> {/* Boton para abrir formulario */}
+        {tablaabierta && (
+          <Grid className="tabla" /> /* Renderiza el componente Grid personalizado */
+        )}
+          {formularioAbierto && (   /* Condicion para verificar el estado de formularioAbierto*/
             <div className="Form">
               <Row className="justify-content-center">
                 <Col sm={10}>
-                  <PrimerFormulario 
+                  <PrimerFormulario //Definicion del formulario
                     personaNombre={personaNombre} 
-                    onCloseFormulario={handleCloseFormulario} 
+                    onCloseFormulario={handleCloseFormulario} // propiedad para cerrar el formulario haciendo prop a el archivo PrimerFomulario
                   />
                 </Col>
               </Row>
