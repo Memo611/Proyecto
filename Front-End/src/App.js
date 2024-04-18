@@ -4,7 +4,7 @@ import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import PrimerFormulario from './Componentes/PrimerFormulario.js'; //Importacion de Formulario
 import { Button, Col, Row } from 'react-bootstrap';
-import Grid from './Componentes/Grid.js';  //Importacion de Tabla
+import { Grid }from './Componentes/Grid.js';  //Importacion de Tabla
 
 function App() {
 

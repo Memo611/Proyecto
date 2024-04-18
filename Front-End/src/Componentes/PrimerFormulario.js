@@ -2,14 +2,14 @@ import {Col, Button, Row, Form, Card, CardHeader, CardBody, CardFooter} from 're
 import './PrimerFormulario.css'
 
 
-function PrimerFormulario({ personaNombre, onCloseFormulario }) {
+function PrimerFormulario({ personaNombre, onCloseFormulario  /* prop para cerrar formulario */ }) {
     function Click(){
         console.log (personaNombre);
     }
 
     const handleCancel = () => {
-    onCloseFormulario(); // Cierra el formulario al hacer clic en "Cancelar"
-};
+        onCloseFormulario(); // Cierra el formulario al hacer clic en "Cancelar"
+    };
 
 return (
     <Row sm={7}>
