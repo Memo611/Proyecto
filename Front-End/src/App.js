@@ -5,9 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import PrimerFormulario from './Componentes/PrimerFormulario.js'; //Importacion de Formulario
 import { Button, Col, Row } from 'react-bootstrap';
 import { Grid }from './Componentes/Grid.js';  //Importacion de Tabla
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
-
   const [personaNombre] = useState("Nombre:");
   const [formularioAbierto, setFormularioAbierto] = useState(false);  //Variable constante para abrir y cerrar formulario con false/true
   const [tablaabierta, setTablaAbierta] = useState(true);
