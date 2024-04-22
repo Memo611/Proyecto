@@ -1,44 +1,46 @@
-*{
+* {
     font-size: 20px;
     font-family: Tahoma;
-    justify-content:center;
+    justify-content: center;
 }
-body{
+
+body {
     margin: 0;
     background-color: #1b1b32;
     color: #f5f6f7;
     font-size: 20px;
     font-family: Tahoma;
-    justify-content:center;
+    justify-content: center;
 }
 
-.estilo.card{
+.estilo.card {
     width: 50em;
     min-height: 2em;
     margin-top: 10px;
     border: none;
     border: 2px solid rgb(255, 255, 255);
     background-color: #1b1b32;
-    color:#ffffff ;
+    color: #ffffff;
 }
 
-.cuerpo.card-body{
+.cuerpo.card-body {
     border: none;
     border-top: 2px solid #ffffff;
     border-bottom: 2px solid #ffffff;
     padding: 5px;
 }
-.card-footer{
+
+.card-footer {
     border: none;
     padding: 5px;
 }
 
-.form-label{
+.form-label {
     display: block;
     margin: 20px auto;
 }
 
-.form-control{
+.form-control {
     margin: 10px auto;
     width: 100%;
     min-height: 2em;
@@ -47,7 +49,18 @@ body{
     color: #ffffff;
 }
 
-button{
+.form-control-cuerpo {
+    margin: 10px auto;
+    width: 100%;
+    border-radius: 5px;
+    min-height: 5em;
+    background-color: #25255a;
+    border: 1px solid #0a0a23;
+    color: #ffffff;
+    overflow-x: auto;
+}
+
+button {
     background-color: #0070c0;
     color: #ffffff;
     font-family: Arial, sans-serif;
@@ -63,9 +76,20 @@ button{
     display: inline-block;
 }
 
+.MuiToolbar-root {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.MuiToolbar-root button {
+    margin-left: 20px;
+}
+
 .boton:hover {
     background-color: #0057a0;
 }
-.Grid{
+
+.Grid {
     padding: 20px;
 }

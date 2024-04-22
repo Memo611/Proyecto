@@ -6,7 +6,7 @@ import PrimerFormulario from './Componentes/PrimerFormulario.js'; //Importacion 
 import { Button, Col, Row } from 'react-bootstrap';
 import { Grid }from './Componentes/Grid.js';  //Importacion de Tabla
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+
 
 function App() {
   const [personaNombre] = useState("Nombre:");
@@ -32,7 +32,7 @@ function App() {
       <body>
         {tablaabierta && (
           <div className="Grid">
-          <Button className="NewUser" onClick={abrirFormulario}>Nuevo Usuario</Button> 
+          <Button className="NewUser" onClick={abrirFormulario}>Nuevo Titulo</Button> 
           <Grid className="tabla" /> 
           </div>
         )}

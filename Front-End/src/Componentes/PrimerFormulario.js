@@ -1,7 +1,7 @@
 import {Col, Button, Row, Form, Card, CardHeader, CardBody, CardFooter} from 'react-bootstrap'
 import './PrimerFormulario.css'
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+
 
 function PrimerFormulario({ personaNombre, onCloseFormulario  /* prop para cerrar formulario */ }) {
     function Click(){
@@ -15,7 +15,7 @@ function PrimerFormulario({ personaNombre, onCloseFormulario  /* prop para cerra
 return (
     <Row sm={7}>
     <Card className='estilo'>
-        <CardHeader className='Titulo'> Registro de Usuario </CardHeader>
+        <CardHeader className='Titulo'> Registro de Titulo </CardHeader>
 
         <CardBody className='cuerpo'>
         <Row>
@@ -50,7 +50,7 @@ return (
                 <Form.Label htmlFor='cuerpo'>Cuerpo : </Form.Label>
             </Col>
             <Col>
-                <input type="number" id="cuerpo" className='form-control' required/> 
+                <textarea type="text" id="cuerpo" className='form-control-cuerpo' required/> 
             </Col>
         </Row>
 
