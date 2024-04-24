@@ -1,19 +1,18 @@
 import { createStore } from 'redux';
 
+// Define el estado inicial
 const initialState = {
-    formularioAbierto: false,
-    tablaAbierta: true,
-    personaNombre: "Nombre:",
-    // Agrega aquí otros estados que necesites administrar
+    titulo: '',
+    cuerpo: '',
 };
 
+// Crea una función reductor para manejar actualizaciones de estado
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'ABRIR_FORMULARIO':
-            return { ...state, formularioAbierto: true, tablaAbierta: false };
-        case 'CERRAR_FORMULARIO':
-            return { ...state, formularioAbierto: false, tablaAbierta: true };
-        // Agrega aquí casos para otras acciones que quieras manejar
+        case 'ACTUALIZAR_TITULO':
+            return { ...state, titulo: action.payload };
+        case 'ACTUALIZAR_CUERPO':
+            return { ...state, cuerpo: action.payload };
         default:
             return state;
     }

@@ -32,7 +32,9 @@ function App() {
       <body>
         {tablaabierta && (
           <div className="Grid">
-          <Button className="NewUser" onClick={abrirFormulario}>Nuevo Titulo</Button> 
+          <Button className="NewUser" onClick={abrirFormulario}>Nuevo</Button>
+          <Button className="NewUser" onClick={abrirFormulario} variant='warning'>Editar</Button>
+          <Button className="NewUser" onClick={abrirFormulario} variant='danger'>Eliminar</Button>
           <Grid className="tabla" /> 
           </div>
         )}

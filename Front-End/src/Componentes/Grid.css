@@ -3,4 +3,6 @@
     /* Opcional para que los botones se ubiquen en línea */
     justify-content: flex-start;
     /* Opcional para alinear los botones a la izquierda */
+    position:absolute;
+    bottom: 50px;
 }
