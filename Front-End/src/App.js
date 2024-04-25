@@ -33,11 +33,7 @@ function App() {
         {tablaabierta && (
           <div className="Grid">
           <Button className="NewUser" onClick={abrirFormulario}>Nuevo</Button>
-<<<<<<< HEAD
           <Button className="NewUser" onClick={abrirFormulario}variant='warning'>Editar</Button>
-=======
-          <Button className="NewUser" onClick={abrirFormulario} variant='warning'>Editar</Button>
->>>>>>> 8b9aec4b47e74a74cc27547d4874c0bb2bf52c42
           <Button className="NewUser" onClick={abrirFormulario} variant='danger'>Eliminar</Button>
           <Grid className="tabla" /> 
           </div>

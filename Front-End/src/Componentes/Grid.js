@@ -15,17 +15,11 @@ export const Grid = () => {
     // configurar los hooks
     const [products, SetProducts] = useState([])
     //Funcion para mostrat los datos con axios
-<<<<<<< HEAD
     const endpoint = 'http://187.189.158.186:7777/Usuario'
     
     const getDatos =  async() =>{
         await axios.get(endpoint).then((response)=>{
-=======
-    const endpoint = 'https://jsonplaceholder.typicode.com/posts'
 
-    const getDatos = async () => {
-        await axios.get(endpoint).then((response) => {
->>>>>>> 8b9aec4b47e74a74cc27547d4874c0bb2bf52c42
             const data = response.data
             console.log(data)
             SetProducts(data)
@@ -34,9 +28,11 @@ export const Grid = () => {
     useEffect(() => {
         getDatos()
     }, [])
-
+    // const para que regrele el valor si o no en la tabla en dado caso el usuario este habilitado
+    const customBodyRender = (valor) => {
+        return valor ? "SI" : "NO";
+    };
     //Definimos las columnas
-<<<<<<< HEAD
     const columns =[
         {name:"idUsuario", label:"UserID"},
         {name:"nombre", label:"Nombre"},
@@ -44,16 +40,13 @@ export const Grid = () => {
         {name:"segundoApellido", label:"Segundo apellido"},
         {name:"nombreUsuario", label:"Nombre de Usuario"},
         {name:"contraseña", label:"Contraseña"},
-        {name:"habilitado", label:"Estado"},
+        {name:"habilitado", label:"Estado",
+        options:{
+            customBodyRender: customBodyRender,
+        }},
         {name:"nombreCompleto", label:"Nombre completo"},
         {name:"strFechaNacimiento", label:"Fecha de Nacimiento"},
-=======
-    const columns = [
-        { name: "userId", label: "UserID" },
-        { name: "Id", label: "ID" },
-        { name: "title", label: "Titulo" },
-        { name: "body", label: "Cuerpo" },
->>>>>>> 8b9aec4b47e74a74cc27547d4874c0bb2bf52c42
+
     ]
     const options = {
         filterType: 'checkbox'
