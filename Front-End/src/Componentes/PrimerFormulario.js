@@ -20,7 +20,7 @@ return (
         <CardBody className='cuerpo'>
         <Row>
             <Col>
-                <Form.Label htmlFor='userid'>UserID : </Form.Label>
+                <Form.Label htmlFor='userid'>UserID: </Form.Label>
             </Col>
             <Col>
                 <input type="text" id="userid" className='form-control' required/>
@@ -29,28 +29,37 @@ return (
 
         <Row>
             <Col>
-                <Form.Label htmlFor='ID'>ID : </Form.Label>
+                <Form.Label htmlFor='nombre'>Nombre: </Form.Label>
             </Col>
             <Col>
-                <input type="text" id="ID" className='form-control' required/> 
-            </Col>
-        </Row>
-
-        <Row>
-            <Col>
-                <Form.Label htmlFor='titulo'>Titulo : </Form.Label>
-            </Col>
-            <Col>
-                <input type="text" id="titulo" className='form-control'required />
+                <input type="text" id="nombre" className='form-control' required/> 
             </Col>
         </Row>
 
         <Row>
             <Col>
-                <Form.Label htmlFor='cuerpo'>Cuerpo : </Form.Label>
+                <Form.Label htmlFor='primerApellido'>Primer Apellido: </Form.Label>
             </Col>
             <Col>
-                <input type="number" id="cuerpo" className='form-control' required/> 
+                <input type="text" id="primerApellido" className='form-control'required />
+            </Col>
+        </Row>
+
+        <Row>
+            <Col>
+                <Form.Label htmlFor='segundoApellido'>Segundo Apellido: </Form.Label>
+            </Col>
+            <Col>
+                <input type="number" id="segundoApellido" className='form-control' required/> 
+            </Col>
+        </Row>
+
+        <Row>
+            <Col>
+                <Form.Label htmlFor='fechaNacimiento'>Fecha de Nacimiento: </Form.Label>
+            </Col>
+            <Col>
+                <input type="number" id="fechaNacimiento" className='form-control' required/> 
             </Col>
         </Row>
 

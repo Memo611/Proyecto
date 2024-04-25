@@ -15,7 +15,7 @@ export const Grid = () =>{
     // configurar los hooks
     const [products, SetProducts] = useState([])
     //Funcion para mostrat los datos con axios
-    const endpoint = 'https://jsonplaceholder.typicode.com/posts'
+    const endpoint = 'http://187.189.158.186:7777/Usuario'
     
     const getDatos =  async() =>{
         await axios.get(endpoint).then((response)=>{
@@ -30,10 +30,15 @@ export const Grid = () =>{
 
     //Definimos las columnas
     const columns =[
-        {name:"userId", label:"UserID"},
-        {name:"Id", label:"ID"},
-        {name:"title", label:"Titulo"},
-        {name:"body", label:"Cuerpo"},
+        {name:"idUsuario", label:"UserID"},
+        {name:"nombre", label:"Nombre"},
+        {name:"primerApellido", label:"Primer Apellido"},
+        {name:"segundoApellido", label:"Segundo apellido"},
+        {name:"nombreUsuario", label:"Nombre de Usuario"},
+        {name:"contraseña", label:"Contraseña"},
+        {name:"habilitado", label:"Estado"},
+        {name:"nombreCompleto", label:"Nombre completo"},
+        {name:"strFechaNacimiento", label:"Fecha de Nacimiento"},
     ]
 
     //agregamos opciones
