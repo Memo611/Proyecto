@@ -60,7 +60,7 @@ body {
     overflow-x: auto;
 }
 
-button {
+Button {
     background-color: #0070c0;
     color: #ffffff;
     font-family: Arial, sans-serif;
@@ -74,16 +74,6 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-}
-
-.MuiToolbar-root {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.MuiToolbar-root button {
-    margin-left: 20px;
 }
 
 .boton:hover {
