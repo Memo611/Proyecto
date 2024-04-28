@@ -2,7 +2,7 @@ import spiderman from './spiderman-homecoming.svg'; //Importacion de LOGO
 import './App.css';  //Importacion de Diseño CSS
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { Col, Row } from 'react-bootstrap';
-import UserIndex from './Componentes/index.js';
+import Usuarios from './Componentes/index.js';
 import React from 'react';
 
 
@@ -17,7 +17,7 @@ function App() {
       </header>
       <Row className='justify-content-center'>
         <Col sm={10}>
-          <UserIndex></UserIndex>
+        <Usuarios />
         </Col>
       </Row>
     </div>

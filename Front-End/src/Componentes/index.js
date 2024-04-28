@@ -2,19 +2,23 @@ import React, { useState } from 'react';
 import PrimerFormulario from './PrimerFormulario';
 import Grid from './Grid';
 
-function UserIndex() {
-    const [showform, setshowform] = useState(true);
-    function chvalue() {
-        setshowform(!showform);
+function Usuarios() {
+    const [showForm, setShowForm] = useState(false);
+    const [idUserEdit, setUserEdit] = useState(0);
+    const showTable = () => {
+        setShowForm(prevShowForm => !prevShowForm); // Utilizando el estado anterior
+    };
+    function FunctionUserEdit(idUser){
+        setUserEdit(idUser);
     }
+
     return (
-        showform ?
-            (<Grid settable={chvalue}/>)
-            : (<PrimerFormulario setform={chvalue}/>)
+        showForm ? (
+            <PrimerFormulario showForm={showTable} idUserEdit={idUserEdit}/>
+        ) : (
+            <Grid showForm={showTable} idUserEdit={(id) => FunctionUserEdit(id)}/>
+        )
     );
 }
 
-
-
-
-export default UserIndex;
+export default Usuarios;

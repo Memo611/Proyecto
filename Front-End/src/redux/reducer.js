@@ -1,6 +1,6 @@
 
 import { createSlice } from "@reduxjs/toolkit";
-import { getUsers } from './actions'
+import { getUsers, getUserUnique } from './actions';
 
 const initialState = {
     users: [],
@@ -8,7 +8,7 @@ const initialState = {
     error: null,
 };
 
-const UserSlice = createSlice({
+const UsersSlice = createSlice({
     name: "getUsers",
     initialState,
     reducers: {},
@@ -29,6 +29,22 @@ const UserSlice = createSlice({
                 state.loading = false;
                 state.error = action.error.message;
             })
-    }
-})
-export const getUserReducer = UserSlice.reducer;
+            .addCase(getUserUnique.pending, (state) => {
+                state.users = {};
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getUserUnique.fulfilled, (state, action) => {
+                state.users = action.payload;
+                state.loading = false;
+                state.error = null;
+            })
+            .addCase(getUserUnique.rejected, (state, action) => {
+                state.users = {};
+                state.loading = false;
+                state.error = action.error.message;
+            });
+    },
+});
+
+export const getUserReducer = UsersSlice.reducer;
