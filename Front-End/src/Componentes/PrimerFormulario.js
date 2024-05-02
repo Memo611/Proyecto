@@ -2,12 +2,45 @@ import { Col, Button, Row, Form, Card, CardHeader, CardBody, CardFooter } from '
 import './PrimerFormulario.css'
 import React from 'react';
 import { useState } from 'react';
+import { crearUsuario } from '../redux/actions';
 
-function PrimerFormulario({ showForm}) {
+function PrimerFormulario({ showForm }) {
     const [contrasenaVisible, setContraseñaVisible] = useState(false); // Estado para rastrear visibilidad de contraseña
+    const [nombre, setNombre] = useState('');
+    const [primerApellido, setPrimerApellido] = useState('');
+    const [segundoApellido, setSegundoApellido] = useState('');
+    const [fechaNacimiento, setFechaNacimiento] = useState('');
+    const [nombreUsuario, setNombreUsuario] = useState('');
+    const [contraseña, setContraseña] = useState('');
 
     const toggleContraseñaVisibility = () => {
         setContraseñaVisible(!contrasenaVisible); // Invertir estado de visibilidad de contraseña
+    };
+    const handleSubmit = async (event) => {
+        event.preventDefault(); // Evita el envío predeterminado del formulario
+
+        const usuario = {
+            nombre,
+            primerApellido,
+            segundoApellido,
+            fechaNacimiento,
+            nombreUsuario,
+            contraseña,
+        };
+
+        try {
+            const respuesta = await crearUsuario(usuario);
+            if (respuesta) {
+                console.log('¡Usuario creado exitosamente!');
+                // Maneja la creación exitosa (por ejemplo, limpiar formulario, mostrar mensaje de éxito)
+            } else {
+                console.error('Error al crear usuario');
+                // Maneja el error de creación (por ejemplo, mostrar mensaje de error)
+            }
+        } catch (error) {
+            console.error('Error inesperado:', error);
+            // Maneja errores inesperados
+        }
     };
 
     return (
@@ -16,6 +49,7 @@ function PrimerFormulario({ showForm}) {
                 <CardHeader className='Titulo'> Registro de Usuario </CardHeader>
 
                 <CardBody className='cuerpo'>
+                    <Form onSubmit={handleSubmit}>
                     <Row>
                         <Col>
                             <Form.Label htmlFor='idUsuario'>ID:  </Form.Label>
@@ -30,7 +64,7 @@ function PrimerFormulario({ showForm}) {
                             <Form.Label htmlFor='nombre'>Nombre: </Form.Label>
                         </Col>
                         <Col>
-                            <input type="text" id="nombre" name='nombre' className='form-control' required />
+                            <input type="text" id="nombre" name='nombre' className='form-control' required onChange={(e) => setNombre(e.target.value)} />
                         </Col>
                     </Row>
 
@@ -39,7 +73,7 @@ function PrimerFormulario({ showForm}) {
                             <Form.Label htmlFor='primerApellido'>Primer Apellido: </Form.Label>
                         </Col>
                         <Col>
-                            <input type="text" id="primerApellido" name='primerApellido' className='form-control' required />
+                            <input type="text" id="primerApellido" name='primerApellido' className='form-control' required onChange={(e) => setPrimerApellido(e.target.value)}/>
                         </Col>
                     </Row>
 
@@ -48,7 +82,7 @@ function PrimerFormulario({ showForm}) {
                             <Form.Label htmlFor='segundoApellido'>Segundo Apellido: </Form.Label>
                         </Col>
                         <Col>
-                            <input type="text" id="segundoApellido" name='segundoApellido' className='form-control' required />
+                            <input type="text" id="segundoApellido" name='segundoApellido' className='form-control' required onChange={(e) => setSegundoApellido(e.target.value)}/>
                         </Col>
                     </Row>
 
@@ -57,7 +91,7 @@ function PrimerFormulario({ showForm}) {
                             <Form.Label htmlFor='fechaNacimiento'>Fecha de Nacimiento: </Form.Label>
                         </Col>
                         <Col>
-                            <input type="date" id="fechaNacimiento" name='fechaNacimiento' className='form-control' required />
+                            <input type="date" id="fechaNacimiento" name='fechaNacimiento' className='form-control' required onChange={(e) => setFechaNacimiento(e.target.value)} />
                         </Col>
                     </Row>
 
@@ -66,7 +100,7 @@ function PrimerFormulario({ showForm}) {
                             <Form.Label htmlFor='nombreUsuario'>Nombre de Usuario: </Form.Label>
                         </Col>
                         <Col>
-                            <input type="text" id="nombreUsuario" name='nombreUsuario' className='form-control' required />
+                            <input type="text" id="nombreUsuario" name='nombreUsuario' className='form-control' required onChange={(e) => setNombreUsuario(e.target.value)}/>
                         </Col>
                     </Row>
 
@@ -77,7 +111,8 @@ function PrimerFormulario({ showForm}) {
                         <Col>
                             <div className="input-group mb-3">
                                 <input type={contrasenaVisible ? "text" : "password"} // Establecer tipo basado en el estado
-                                    id="contraseña" name='contraseña' className='form-control' required
+                                    id="contraseña" name='contraseña' className='form-control' required value={contraseña}
+                                    onChange={(e) => setContraseña(e.target.value)}
                                 />
                                 <div className="input-group-append">
                                     <button
@@ -92,11 +127,12 @@ function PrimerFormulario({ showForm}) {
                             </div>
                         </Col>
                     </Row>
+                    </Form>
                 </CardBody>
 
                 <CardFooter>
                     <Col>
-                        <Button> Guardar</Button>
+                        <Button type='submit'> Guardar</Button>
                         <Button variant="danger" onClick={showForm}> Cancelar</Button>
                     </Col>
                 </CardFooter>

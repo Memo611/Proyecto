@@ -65,7 +65,7 @@ function Grid({ showForm }) {
             label: "Estado",
             options: {
                 customBodyRender: (valor) => {
-                    return valor ? "SI" : "NO";
+                    return valor ? "ACTIVO" : "DESACTIVADO";
                 }
             },
         },
