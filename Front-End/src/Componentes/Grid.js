@@ -4,26 +4,26 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useEffect, useState, useRef } from "react";
 import './PrimerFormulario.css';
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../redux/actions";
+import { getUsers,deleteUser } from "../redux/actions";
 
+const DATA_ITEM_KEY = "idUsuario";
+const SELECTED_FIELD = "selected";
+const idGetter = getter(DATA_ITEM_KEY);
 
-function Grid({ showForm }) {
+function Grid({ showForm, idUserEdit}) {
     const dispatch = useDispatch();
     const { users } = useSelector((state) => state.getUsers); // Acceder a los datos del usuario
     const [showPassword, setShowPassword] = useState(false);
+    const [userSelected, setUserSelected] = React.useState(false);
+    const [selectedState, setSelectedState] = React.useState({});
     const tableRef = useRef(null); // Referencia a la tabla MUIDataTable
 
-    useEffect(() => {
-        dispatch(getUsers());
-    }, [dispatch]);
 
     const darkTheme = createTheme({
         palette: {
             mode: 'dark',
         },
     });
-
-    // Función para devolver asteriscos o la contraseña en la tabla
     // Función para devolver "SI" o "NO" en la tabla según el estado del usuario
     const customBodyRender = (valor, tableMeta) => {
         const rowId = tableMeta.rowData.idUsuario; // Obtener el ID de la fila
@@ -88,14 +88,70 @@ function Grid({ showForm }) {
             }));
         },
     };
+    const onSelectionChange = (event) => {
+        const newSelectedState = getSelectedState({
+        event,
+        selectedState: selectedState,
+        dataItemKey: DATA_ITEM_KEY,
+        });
+        setSelectedState(newSelectedState);
+        setUserSelected(true);
+        idUserEdit(Object.keys(newSelectedState)[0]);
+    };
+
+    const onKeyDown = (event) => {
+        const newSelectedState = getSelectedStateFromKeyDown({
+        event,
+        selectedState: selectedState,
+        dataItemKey: DATA_ITEM_KEY,
+        });
+        setSelectedState(newSelectedState);
+    };
+
+    React.useEffect(() => {
+        dispatch(getUsers());
+        if (users) {
+            users.map((dataItem) =>
+                Object.assign(
+                    {
+                        selected: false,
+                    },
+                    dataItem
+                )
+            );
+        }
+    }, [dispatch]);
+
+    const handleNew = () => {
+        showForm();
+        idUserEdit(0);
+    };
+
+    const handleEdit = () => {
+        if (userSelected) {
+            showForm();
+        } else {
+            alert('Seleccione un usuario para modificar');
+        }
+    };
+
+    const handleDelete = () => {
+        if (userSelected) {
+            // Eliminar usuario seleccionado
+            const idUserDelete = Object.keys(selectedState)[0];
+            dispatch(deleteUser(idUserDelete));
+        } else {
+            alert("Seleccione un usuario para eliminar");
+        }
+    };
 
     // Renderizamos la Tabla
     return (
         <>
             <div className="Botones">
-                <Button className="NewUser" variant="primary" onClick={showForm}>Nuevo</Button>
-                <Button className="NewUser" variant="warning" onClick={showForm}>Editar</Button>
-                <Button className="NewUser" variant="danger" >Eliminar</Button>
+                <Button className="NewUser" variant="primary" onClick={handleNew}>Nuevo</Button>
+                <Button className="NewUser" variant="warning" onClick={handleEdit}>Editar</Button>
+                <Button className="NewUser" variant="danger" onClick={handleDelete}>Eliminar</Button>
             </div>
             <ThemeProvider theme={darkTheme}>
                 <MUIDataTable
@@ -104,6 +160,10 @@ function Grid({ showForm }) {
                     columns={columns}
                     options={options}
                     ref={tableRef}
+                    dataItemKey={DATA_ITEM_KEY}
+                    selectedField={SELECTED_FIELD}
+                    onSelectionChange={onSelectionChange}
+                    onKeyDown={onKeyDown}
                 />
             </ThemeProvider>
 

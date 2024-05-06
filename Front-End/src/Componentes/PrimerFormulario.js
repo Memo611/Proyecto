@@ -2,7 +2,6 @@ import { Col, Button, Row, Form, Card, CardHeader, CardBody, CardFooter } from '
 import './PrimerFormulario.css'
 import React from 'react';
 import { useState } from 'react';
-import { crearUsuario } from '../redux/actions';
 
 function PrimerFormulario({ showForm }) {
     const [contrasenaVisible, setContraseñaVisible] = useState(false); // Estado para rastrear visibilidad de contraseña
@@ -29,7 +28,7 @@ function PrimerFormulario({ showForm }) {
         };
 
         try {
-            const respuesta = await crearUsuario(usuario);
+            const respuesta = await (usuario);
             if (respuesta) {
                 console.log('¡Usuario creado exitosamente!');
                 // Maneja la creación exitosa (por ejemplo, limpiar formulario, mostrar mensaje de éxito)

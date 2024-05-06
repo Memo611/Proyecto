@@ -1,9 +1,10 @@
 
 import { createSlice } from "@reduxjs/toolkit";
-import { getUsers, getUserUnique, crearUsuario} from './actions';
+import { getUsers, getUserUnique } from './actions';
 
 const initialState = {
     users: [],
+    user: {},
     loading: false,
     error: null,
 };
@@ -29,33 +30,18 @@ const UsersSlice = createSlice({
                 state.loading = false;
                 state.error = action.error.message;
             })
-            .addCase(crearUsuario.pending, (state) => {
-                state.users = [];
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(crearUsuario.fulfilled, (state, action) => {
-                state.users = action.payload;
-                state.loading = false;
-                state.error = null;
-            })
-            .addCase(crearUsuario.rejected, (state, action) => {
-                state.users = [];
-                state.loading = false;
-                state.error = action.error.message;
-            })
             .addCase(getUserUnique.pending, (state) => {
-                state.users = {};
+                state.user = {};
                 state.loading = true;
                 state.error = null;
             })
             .addCase(getUserUnique.fulfilled, (state, action) => {
-                state.users = action.payload;
+                state.user = action.payload;
                 state.loading = false;
                 state.error = null;
             })
             .addCase(getUserUnique.rejected, (state, action) => {
-                state.users = {};
+                state.user = {};
                 state.loading = false;
                 state.error = action.error.message;
             });
