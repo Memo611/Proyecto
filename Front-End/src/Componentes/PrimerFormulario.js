@@ -1,46 +1,70 @@
 import { Col, Button, Row, Form, Card, CardHeader, CardBody, CardFooter } from 'react-bootstrap'
 import './PrimerFormulario.css'
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { addUser, getUserUnique } from '../redux/actions';
+import { useDispatch } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import Swal from 'sweetalert2';
 
-function PrimerFormulario({ showForm }) {
-    const [contrasenaVisible, setContraseñaVisible] = useState(false); // Estado para rastrear visibilidad de contraseña
-    const [nombre, setNombre] = useState('');
-    const [primerApellido, setPrimerApellido] = useState('');
-    const [segundoApellido, setSegundoApellido] = useState('');
-    const [fechaNacimiento, setFechaNacimiento] = useState('');
-    const [nombreUsuario, setNombreUsuario] = useState('');
-    const [contraseña, setContraseña] = useState('');
-
-    const toggleContraseñaVisibility = () => {
-        setContraseñaVisible(!contrasenaVisible); // Invertir estado de visibilidad de contraseña
+function PrimerFormulario({ showForm, id }) {
+    const initialUserState = {
+        IDUsuario: 0,
+        Nombre: '',
+        PrimerApellido: '',
+        SegundoApellido: '',
+        Genero: "",
+        Correo: '',
+        FechaNacimiento: '',
+        Telefono: '',
+        IDRol: 0,
+        NombreUsuario: '',
+        Contraseña: '',
+        ConfirmarContraseña: '',
+        Habilitado: true
     };
-    const handleSubmit = async (event) => {
-        event.preventDefault(); // Evita el envío predeterminado del formulario
+    const dispatch = useDispatch();
+    const [user, setUser] = useState({ initialUserState });
 
-        const usuario = {
-            nombre,
-            primerApellido,
-            segundoApellido,
-            fechaNacimiento,
-            nombreUsuario,
-            contraseña,
-        };
+    useEffect(() => {
+        if (id > 0) {
+            dispatch(getUserUnique(id))
+                .then((response) => {
+                    setUser(response.payload);
+                });
+        }
+    }, [dispatch, id]);
 
-        try {
-            const respuesta = await (usuario);
-            if (respuesta) {
-                console.log('¡Usuario creado exitosamente!');
-                // Maneja la creación exitosa (por ejemplo, limpiar formulario, mostrar mensaje de éxito)
-            } else {
-                console.error('Error al crear usuario');
-                // Maneja el error de creación (por ejemplo, mostrar mensaje de error)
+    const handleCancel = () => {
+        setUser(initialUserState);
+        showForm();
+    };
+
+    const handleGuardar = async () => {
+        if (user.Contraseña === user.ConfirmarContraseña) {
+            try {
+                const respuesta = await dispatch(addUser(user)); // Suponiendo que addUser devuelve una promesa
+                console.log('Usuario guardado:', respuesta); // Registra la respuesta para depurar
+                setUser(initialUserState); // Limpia el formulario después del envío exitoso
+            } catch (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Error al guardar usuario",
+                });
+            } finally {
+                // Opcionalmente, vuelve a habilitar el botón aquí si se deshabilitó durante la solicitud
             }
-        } catch (error) {
-            console.error('Error inesperado:', error);
-            // Maneja errores inesperados
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Las Contraseñas no coinciden",
+            });
         }
     };
+
 
     return (
         <Row sm={7}>
@@ -48,22 +72,13 @@ function PrimerFormulario({ showForm }) {
                 <CardHeader className='Titulo'> Registro de Usuario </CardHeader>
 
                 <CardBody className='cuerpo'>
-                    <Form onSubmit={handleSubmit}>
-                    <Row>
-                        <Col>
-                            <Form.Label htmlFor='idUsuario'>ID:  </Form.Label>
-                        </Col>
-                        <Col>
-                            <input readOnly type="number" id="idUsuario" name='idUsuario' className='form-control' />
-                        </Col>
-                    </Row>
-
                     <Row>
                         <Col>
                             <Form.Label htmlFor='nombre'>Nombre: </Form.Label>
                         </Col>
                         <Col>
-                            <input type="text" id="nombre" name='nombre' className='form-control' required onChange={(e) => setNombre(e.target.value)} />
+                            <input type="text" id="nombre" name='nombre' className='form-control' required value={user.Nombre}
+                                onChange={(e) => setUser({ ...user, Nombre: e.target.value })} />
                         </Col>
                     </Row>
 
@@ -72,7 +87,8 @@ function PrimerFormulario({ showForm }) {
                             <Form.Label htmlFor='primerApellido'>Primer Apellido: </Form.Label>
                         </Col>
                         <Col>
-                            <input type="text" id="primerApellido" name='primerApellido' className='form-control' required onChange={(e) => setPrimerApellido(e.target.value)}/>
+                            <input type="text" id="primerApellido" name='primerApellido' className='form-control' required value={user.PrimerApellido}
+                                onChange={(e) => setUser({ ...user, PrimerApellido: e.target.value })} />
                         </Col>
                     </Row>
 
@@ -81,7 +97,26 @@ function PrimerFormulario({ showForm }) {
                             <Form.Label htmlFor='segundoApellido'>Segundo Apellido: </Form.Label>
                         </Col>
                         <Col>
-                            <input type="text" id="segundoApellido" name='segundoApellido' className='form-control' required onChange={(e) => setSegundoApellido(e.target.value)}/>
+                            <input type="text" id="segundoApellido" name='segundoApellido' className='form-control' required value={user.SegundoApellido}
+                                onChange={(e) => setUser({ ...user, SegundoApellido: e.target.value })} />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col>
+                            <Form.Label htmlFor='genero'>Genero: </Form.Label>
+                        </Col>
+                        <Col>
+                            <Form.Select
+                                name="genero"
+                                id='genero'
+                                value={user.Genero} // Usa el valor del estado
+                                onChange={(e) => setUser({ ...user, Genero: e.target.value })}
+                            >
+                                <option value={""} disabled>Seleccione un Genero</option>
+                                <option value={"Masculino"}>Masculino</option>
+                                <option value={"Femenino"}>Femenino</option>
+                            </Form.Select>
                         </Col>
                     </Row>
 
@@ -90,7 +125,61 @@ function PrimerFormulario({ showForm }) {
                             <Form.Label htmlFor='fechaNacimiento'>Fecha de Nacimiento: </Form.Label>
                         </Col>
                         <Col>
-                            <input type="date" id="fechaNacimiento" name='fechaNacimiento' className='form-control' required onChange={(e) => setFechaNacimiento(e.target.value)} />
+                            <DatePicker
+                                name='fechaNacimiento'
+                                id='fechaNacimiento'
+                                className='form-control'
+                                selected={user.FechaNacimiento}
+                                onChange={(date) => setUser({ ...user, FechaNacimiento: date })}
+                            />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col>
+                            <Form.Label htmlFor='correo'>Correo: </Form.Label>
+                        </Col>
+                        <Col>
+                            <input type='text'
+                                name="correo"
+                                id='correo'
+                                value={user.Correo}
+                                onChange={(e) => setUser({ ...user, Correo: e.target.value })}
+                                required
+                            />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col>
+                            <Form.Label htmlFor='telefono'>Telefono: </Form.Label>
+                        </Col>
+                        <Col>
+                            <input
+                                type='text'
+                                name="telefono"
+                                id='telefono'
+                                value={user.Telefono}
+                                onChange={(e) => setUser({ ...user, Telefono: e.target.value })}
+                                required
+                            />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col>
+                            <Form.Label htmlFor='idRol'>Rol: </Form.Label>
+                        </Col>
+                        <Col>
+                            <Form.Select
+                                name="idRol"
+                                id='idRol'
+                                value={user.IDRol}
+                                onChange={(e) => setUser({ ...user, IDRol: parseInt(e.target.value) })}>
+                                <option value={"0"} disabled>Seleccione un Rol</option>
+                                <option value={"1"}>Administrador</option>
+                                <option value={"2"}>Usuario</option>
+                            </Form.Select>
                         </Col>
                     </Row>
 
@@ -99,7 +188,11 @@ function PrimerFormulario({ showForm }) {
                             <Form.Label htmlFor='nombreUsuario'>Nombre de Usuario: </Form.Label>
                         </Col>
                         <Col>
-                            <input type="text" id="nombreUsuario" name='nombreUsuario' className='form-control' required onChange={(e) => setNombreUsuario(e.target.value)}/>
+                            <input type="text"
+                                name="nombreUsuario"
+                                id='nombreUsuario'
+                                value={user.NombreUsuario}
+                                onChange={(e) => setUser({ ...user, NombreUsuario: e.target.value })} />
                         </Col>
                     </Row>
 
@@ -108,31 +201,28 @@ function PrimerFormulario({ showForm }) {
                             <Form.Label htmlFor='contraseña'>Contraseña: </Form.Label>
                         </Col>
                         <Col>
-                            <div className="input-group mb-3">
-                                <input type={contrasenaVisible ? "text" : "password"} // Establecer tipo basado en el estado
-                                    id="contraseña" name='contraseña' className='form-control' required value={contraseña}
-                                    onChange={(e) => setContraseña(e.target.value)}
-                                />
-                                <div className="input-group-append">
-                                    <button
-                                        id="mostrarContrasena"
-                                        className="btn btn-outline-secondary"
-                                        type="button"
-                                        onClick={toggleContraseñaVisibility} // Llamar función toggle al hacer clic
-                                    >
-                                        <i className={contrasenaVisible ? "fas fa-eye-slash" : "fas fa-eye"}></i>
-                                    </button>
-                                </div>
-                            </div>
+                            <input type={'password'} id="contraseña" name='contraseña' className='form-control'
+                                value={user.Contraseña} onChange={(e) => setUser({ ...user, Contraseña: e.target.value })}
+                            />
                         </Col>
                     </Row>
-                    </Form>
+
+                    <Row>
+                        <Col>
+                            <Form.Label htmlFor='confirmarcontraseña'>Confirmar Contraseña: </Form.Label>
+                        </Col>
+                        <Col>
+                            <input type={'password'} id="confirmarcontraseña" name='confirmarcontraseña' className='form-control'
+                                value={user.ConfirmarContraseña} onChange={(e) => setUser({ ...user, ConfirmarContraseña: e.target.value })}
+                            />
+                        </Col>
+                    </Row>
                 </CardBody>
 
                 <CardFooter>
                     <Col>
-                        <Button type='submit'> Guardar</Button>
-                        <Button variant="danger" onClick={showForm}> Cancelar</Button>
+                        <Button variant='primary' onClick={handleGuardar}> Guardar</Button>
+                        <Button variant="danger" onClick={handleCancel}> Cancelar</Button>
                     </Col>
                 </CardFooter>
             </Card>

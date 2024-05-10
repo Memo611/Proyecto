@@ -17,7 +17,7 @@ export const getUsers = createAsyncThunk("users/getUsers",
 );
 
 export const getUserUnique = createAsyncThunk("users/getUserUnique",
-    async (id, {rejectWithValue}) => {
+    async (id) => {
         try
         {      
             const resp = await axios.get('http://187.189.158.186:7777/Usuario/'+id);
@@ -26,13 +26,13 @@ export const getUserUnique = createAsyncThunk("users/getUserUnique",
         } 
         catch (error) 
         {
-            return rejectWithValue(`Error: ${error.message}`);
+            return null;
         }
     }
 );
 
 export const deleteUser = createAsyncThunk("users/deleteUser",
-    async (id, {rejectWithValue}) => {
+    async (id) => {
         try
         {      
             const resp = await axios.delete('http://187.189.158.186:7777/Usuario/'+id);
@@ -41,13 +41,13 @@ export const deleteUser = createAsyncThunk("users/deleteUser",
         } 
         catch (error) 
         {
-            return rejectWithValue(`Error: ${error.message}`);
+            return null;
         }
     }
 );
 
 export const addUser = createAsyncThunk("users/addUser",
-    async (data, {rejectWithValue}) => {
+    async (data) => {
         try
         {      
             const resp = await axios.post('http://187.189.158.186:7777/Usuario', data);
@@ -56,13 +56,13 @@ export const addUser = createAsyncThunk("users/addUser",
         } 
         catch (error) 
         {
-            return rejectWithValue(`Error: ${error.message}`);
+            return null;
         }
     }
 );
 
 export const editUSer = createAsyncThunk("users/editUSer",
-    async (data, {rejectWithValue}) => {
+    async (data) => {
         try
         {      
             const resp = await axios.put('http://187.189.158.186:7777/Usuario/'+data.id, data);
@@ -71,7 +71,82 @@ export const editUSer = createAsyncThunk("users/editUSer",
         } 
         catch (error) 
         {
-            return rejectWithValue(`Error: ${error.message}`);
+            return null;
+        }
+    }
+);
+
+export const getRoles = createAsyncThunk("users/getRoles",
+    async () => {
+        try
+        {      
+            const resp = await axios.get('http://187.189.158.186:7777/Roles');
+
+            return resp.data;
+        } 
+        catch (error) 
+        {
+            return null;
+        }
+    }
+);
+
+export const getRoleUnique = createAsyncThunk("users/getRoleUnique",
+    async (id) => {
+        try
+        {      
+            const resp = await axios.get('http://187.189.158.186:7777/Role/'+id);
+
+            return resp.data;
+        } 
+        catch (error) 
+        {
+            return null;
+        }
+    }
+);
+
+export const deleteRole = createAsyncThunk("users/deleteRole",
+    async (id) => {
+        try
+        {      
+            const resp = await axios.delete('http://187.189.158.186:7777/Role/'+id);
+
+            return resp.data;
+        } 
+        catch (error) 
+        {
+            return null;
+        }
+    }
+);
+
+export const addRole = createAsyncThunk("users/addRole",
+    async (data) => {
+        try
+        {      
+            const resp = await axios.post('http://187.189.158.186:7777/Role', data);
+
+            return resp.data;
+        } 
+        catch (error) 
+        {
+            return null;
+        }
+    }
+);
+
+export const editRole = createAsyncThunk("users/editRole",
+    async (data) => {
+        try
+        {      
+            const resp = await axios.put('http://187.189.158.186:7777/Role/'+data.id, data);
+
+            return resp.data;
+        } 
+        catch (error) 
+        {
+            return null;
         }
     }
 );

@@ -1,52 +1,27 @@
 import MUIDataTable from "mui-datatables";
 import { Button } from 'react-bootstrap';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import './PrimerFormulario.css';
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers,deleteUser } from "../redux/actions";
+import { getUsers, deleteUser } from "../redux/actions";
+import Swal from 'sweetalert2';
 
-const DATA_ITEM_KEY = "idUsuario";
-const SELECTED_FIELD = "selected";
-const idGetter = getter(DATA_ITEM_KEY);
-
-function Grid({ showForm, idUserEdit}) {
+function Grid({ showForm, idUserEdit }) {
     const dispatch = useDispatch();
     const { users } = useSelector((state) => state.getUsers); // Acceder a los datos del usuario
-    const [showPassword, setShowPassword] = useState(false);
     const [userSelected, setUserSelected] = React.useState(false);
-    const [selectedState, setSelectedState] = React.useState({});
+    const [selectedRowIds, setSelectedRowIds] = React.useState([]);
     const tableRef = useRef(null); // Referencia a la tabla MUIDataTable
-
 
     const darkTheme = createTheme({
         palette: {
             mode: 'dark',
         },
     });
-    // Función para devolver "SI" o "NO" en la tabla según el estado del usuario
-    const customBodyRender = (valor, tableMeta) => {
-        const rowId = tableMeta.rowData.idUsuario; // Obtener el ID de la fila
-        return (
-            <div>
-                {showPassword[rowId] ? valor : "********"}
-                <Button
-                    variant="outline-primary"
-                    size="sm"
-                    onClick={() => {
-                        setShowPassword((prevState) => ({
-                            ...prevState,
-                            [rowId]: !prevState[rowId],
-                        }));
-                    }}
-                >
-                    {showPassword[rowId] ? "Ocultar" : "Ver"}
-                </Button>
-            </div>
-        );
-    };
 
-    // Definimos las columnas
+
+    // Definir las columnas de la tabla
     const columns = [
         { name: "idUsuario", label: "ID de Usuario" },
         { name: "nombre", label: "Nombre" },
@@ -54,11 +29,7 @@ function Grid({ showForm, idUserEdit}) {
         { name: "segundoApellido", label: "Segundo Apellido" },
         { name: "nombreUsuario", label: "Nombre de Usuario" },
         {
-            name: "contraseña",
-            label: "Contraseña",
-            options: {
-                customBodyRender,
-            },
+            name: "contraseña", label: "Contraseña",
         },
         {
             name: "habilitado",
@@ -66,7 +37,7 @@ function Grid({ showForm, idUserEdit}) {
             options: {
                 customBodyRender: (valor) => {
                     return valor ? "ACTIVO" : "DESACTIVADO";
-                }
+                },
             },
         },
         { name: "nombreCompleto", label: "Nombre Completo" },
@@ -75,40 +46,19 @@ function Grid({ showForm, idUserEdit}) {
 
     const options = {
         filterType: 'checkbox',
-        selectableRows: "auto", // Habilita la selección de filas
-        onRowSelectionChange: (selectedRows) => {
-            const selectedRowIds = selectedRows.map((row) => row.idUsuario);
-            // Actualizar el estado de visibilidad de las contraseñas para las filas seleccionadas
-            setShowPassword((prevState) => ({
-                ...prevState,
-                ...selectedRowIds.reduce((acc, id) => {
-                    acc[id] = true;
-                    return acc;
-                }, {}),
-            }));
-        },
     };
+
     const onSelectionChange = (event) => {
-        const newSelectedState = getSelectedState({
-        event,
-        selectedState: selectedState,
-        dataItemKey: DATA_ITEM_KEY,
-        });
-        setSelectedState(newSelectedState);
-        setUserSelected(true);
-        idUserEdit(Object.keys(newSelectedState)[0]);
+        const selectedRows = event.data.selectedRows;
+        // Actualiza selectedRowIds con los IDs de las filas seleccionadas
+        setSelectedRowIds(selectedRows.map((row) => row.idUsuario));
+        setUserSelected(selectedRows.length > 0); // Establece userSelected en true si hay filas seleccionadas
+        if (selectedRows.length > 0) {
+            idUserEdit(selectedRows[0].idUsuario); // Establece el ID del usuario para editar (asumiendo que solo se puede editar un usuario a la vez)
+        }
     };
 
-    const onKeyDown = (event) => {
-        const newSelectedState = getSelectedStateFromKeyDown({
-        event,
-        selectedState: selectedState,
-        dataItemKey: DATA_ITEM_KEY,
-        });
-        setSelectedState(newSelectedState);
-    };
-
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(getUsers());
         if (users) {
             users.map((dataItem) =>
@@ -123,25 +73,41 @@ function Grid({ showForm, idUserEdit}) {
     }, [dispatch]);
 
     const handleNew = () => {
-        showForm();
-        idUserEdit(0);
+        showForm(); // Suponiendo que `showForm` está definida y abre el formulario para crear un nuevo usuario
+        idUserEdit(0); // Establecer el ID de usuario a 0 para indicar un nuevo usuario
     };
 
     const handleEdit = () => {
         if (userSelected) {
-            showForm();
+            showForm(); // Abrir formulario para editar
         } else {
-            alert('Seleccione un usuario para modificar');
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Seleccione un usuario para editar",
+            });
         }
     };
 
     const handleDelete = () => {
         if (userSelected) {
-            // Eliminar usuario seleccionado
-            const idUserDelete = Object.keys(selectedState)[0];
-            dispatch(deleteUser(idUserDelete));
+            const idUserDelete = selectedRowIds[0]; // Usa el primer ID de selectedRowIds para eliminar
+            dispatch(deleteUser(idUserDelete)).then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Usuario eliminado",
+                    showConfirmButton: false,
+                    timer: 1500,
+                }).then(() => {
+                    dispatch(getUsers());
+                });
+            });
         } else {
-            alert("Seleccione un usuario para eliminar");
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Seleccione un usuario para eliminar",
+            });
         }
     };
 
@@ -160,14 +126,16 @@ function Grid({ showForm, idUserEdit}) {
                     columns={columns}
                     options={options}
                     ref={tableRef}
-                    dataItemKey={DATA_ITEM_KEY}
-                    selectedField={SELECTED_FIELD}
+                    selectable={{
+                        enabled: true,
+                        drag: true,
+                        mode: "single",
+                    }}
                     onSelectionChange={onSelectionChange}
-                    onKeyDown={onKeyDown}
                 />
             </ThemeProvider>
-
         </>
     );
 }
+
 export default Grid;
